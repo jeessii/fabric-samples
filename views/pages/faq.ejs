@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+
+<div class="container">
+    <div class="accordion arrows">
+        <h1>Frequently Asked Questions</h1>
+        <br />
+        
+        <input type="radio" name="accordion" id="cb1" />
+        <section class="box">
+            <label class="box-title" for="cb1">What is a BoL?</label>
+            <label class="box-close" for="acc-close"></label>
+            <div class="box-content">A <b>bill of lading</b> (BL or BoL) is a legal document issued by a carrier to
+                a shipper that details the type,
+                quantity, and destination of the goods being carried. <br /><br />
+                A bill of lading also serves as a shipment receipt when the carrier delivers the goods at a
+                predetermined destination.
+                This document must accompany the shipped products, no matter the form of transportation,
+                and must be signed by an authorized representative from the carrier, shipper, and receiver.
+            </div>
+        </section>
+        <input type="radio" name="accordion" id="cb2" />
+        <section class="box">
+            <label class="box-title" for="cb2">Can I amend the Bill of Lading shipment date after sailing? </label>
+            <label class="box-close" for="acc-close"></label>
+            <div class="box-content">No. To issue a falsely dated Bill of Lading is fraud if the person issuing the
+                Bill of Lading is aware that the date is incorrect.</div>
+        </section>
+        
+
+        <input type="radio" name="accordion" id="acc-close" />
+    </div>
+
+</div>
+
+
+
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

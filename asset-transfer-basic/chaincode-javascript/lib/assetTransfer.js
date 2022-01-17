@@ -7,58 +7,63 @@
 'use strict';
 
 // Deterministic JSON.stringify()
-const stringify  = require('json-stringify-deterministic');
-const sortKeysRecursive  = require('sort-keys-recursive');
-const { Contract } = require('fabric-contract-api');
+const stringify = require('json-stringify-deterministic');
+const sortKeysRecursive = require('sort-keys-recursive');
+const {
+    Contract
+} = require('fabric-contract-api');
 
 class AssetTransfer extends Contract {
 
     async InitLedger(ctx) {
-        const assets = [
-            {
-                ID: 'asset1',
-                Color: 'blue',
-                Size: 5,
-                Owner: 'Tomoko',
-                AppraisedValue: 300,
-            },
-            {
-                ID: 'asset2',
-                Color: 'red',
-                Size: 5,
-                Owner: 'Brad',
-                AppraisedValue: 400,
-            },
-            {
-                ID: 'asset3',
-                Color: 'green',
-                Size: 10,
-                Owner: 'Jin Soo',
-                AppraisedValue: 500,
-            },
-            {
-                ID: 'asset4',
-                Color: 'yellow',
-                Size: 10,
-                Owner: 'Max',
-                AppraisedValue: 600,
-            },
-            {
-                ID: 'asset5',
-                Color: 'black',
-                Size: 15,
-                Owner: 'Adriana',
-                AppraisedValue: 700,
-            },
-            {
-                ID: 'asset6',
-                Color: 'white',
-                Size: 15,
-                Owner: 'Michel',
-                AppraisedValue: 800,
-            },
-        ];
+        const assets = [{
+                ID: 'bol1',
+                ShipperName: 'Marie',
+                ShipperAddress: 'Str. Arago 3',
+                ShipperCity: 'Barcelona',
+                ShipperSID: 300,
+                ShipToName: 'Paul',
+                ShipToAddress: 'Str. Shibuya',
+                ShipToCity: 'Tokio',
+                ShipToCID: 54,
+                BillToName: 'Claire',
+                BillToAddress: 'Wilshire Boulevard ',
+                BillToCity: 'Los Angeles',
+                BillToTelephone: '0123456789',
 
+                CostumerOrderNumber: '12345',
+                NumberPkgs: '50',
+                Wgt: '10000',
+                Pallet: 'Yes',
+                AdditionalShipperInfo: 'Fragile Goods'
+
+            },
+            {
+                ID: 'bol2',
+
+                ShipperName: 'Francisco',
+                ShipperAddress: 'Via del Corso ',
+                ShipperCity: 'Roma',
+                ShipperSID: 599,
+                ShipToName: 'Daniel',
+                ShipToAddress: 'Nanjing Road',
+                ShipToCity: 'Shanghai',
+                ShipToCID: 24,
+                BillToName: 'Lola',
+                BillToAddress: 'Wilshire Boulevard ',
+                BillToCity: 'Los Angeles',
+                BillToTelephone: '0123456789',
+
+                CostumerOrderNumber: '678910',
+                NumberPkgs: '10',
+                Wgt: '9000',
+                Pallet: 'No',
+                AdditionalShipperInfo: 'Important Goods'
+
+            },
+
+        ];
+        
         for (const asset of assets) {
             asset.docType = 'asset';
             // example of how to write to world state deterministically
@@ -70,7 +75,8 @@ class AssetTransfer extends Contract {
     }
 
     // CreateAsset issues a new asset to the world state with given details.
-    async CreateAsset(ctx, id, color, size, owner, appraisedValue) {
+    async CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
+        BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt,Pallet,  AdditionalShipperInfo ) {
         const exists = await this.AssetExists(ctx, id);
         if (exists) {
             throw new Error(`The asset ${id} already exists`);
@@ -78,10 +84,24 @@ class AssetTransfer extends Contract {
 
         const asset = {
             ID: id,
-            Color: color,
-            Size: size,
-            Owner: owner,
-            AppraisedValue: appraisedValue,
+            ShipperName: ShipperName,
+            ShipperAddress:  ShipperAddress,
+            ShipperCity: ShipperCity,
+            ShipperSID: ShipperSID,
+            ShipToName: ShipToName,
+            ShipToAddress: ShipToAddress,
+            ShipToCity: ShipToCity,
+            ShipToCID: ShipToCID,
+            BillToName: BillToName,
+            BillToAddress: BillToAddress,
+            BillToCity: BillToCity,
+            BillToTelephone: BillToTelephone,
+
+            CostumerOrderNumber: CostumerOrderNumber,
+            NumberPkgs: NumberPkgs,
+            Wgt: Wgt,
+            Pallet: Pallet,
+            AdditionalShipperInfo: AdditionalShipperInfo,
         };
         //we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(asset))));
@@ -98,7 +118,8 @@ class AssetTransfer extends Contract {
     }
 
     // UpdateAsset updates an existing asset in the world state with provided parameters.
-    async UpdateAsset(ctx, id, color, size, owner, appraisedValue) {
+    async UpdateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
+        BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt,Pallet,  AdditionalShipperInfo ) {
         const exists = await this.AssetExists(ctx, id);
         if (!exists) {
             throw new Error(`The asset ${id} does not exist`);
@@ -107,10 +128,24 @@ class AssetTransfer extends Contract {
         // overwriting original asset with new asset
         const updatedAsset = {
             ID: id,
-            Color: color,
-            Size: size,
-            Owner: owner,
-            AppraisedValue: appraisedValue,
+            ShipperName: ShipperName,
+            ShipperAddress:  ShipperAddress,
+            ShipperCity: ShipperCity,
+            ShipperSID: ShipperSID,
+            ShipToName: ShipToName,
+            ShipToAddress: ShipToAddress,
+            ShipToCity: ShipToCity,
+            ShipToCID: ShipToCID,
+            BillToName: BillToName,
+            BillToAddress: BillToAddress,
+            BillToCity: BillToCity,
+            BillToTelephone: BillToTelephone,
+
+            CostumerOrderNumber: CostumerOrderNumber,
+            NumberPkgs: NumberPkgs,
+            Wgt: Wgt,
+            Pallet: Pallet,
+            AdditionalShipperInfo: AdditionalShipperInfo,
         };
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         return ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(updatedAsset))));
@@ -135,11 +170,9 @@ class AssetTransfer extends Contract {
     async TransferAsset(ctx, id, newOwner) {
         const assetString = await this.ReadAsset(ctx, id);
         const asset = JSON.parse(assetString);
-        const oldOwner = asset.Owner;
         asset.Owner = newOwner;
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(asset))));
-        return oldOwner;
+        return ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(asset))));
     }
 
     // GetAllAssets returns all assets found in the world state.
@@ -164,4 +197,6 @@ class AssetTransfer extends Contract {
     }
 }
 
+//module.exports = {InitLedger, CreateAsset, DeleteAsset, UpdateAsset, AssetExists, GetAllAssets};
 module.exports = AssetTransfer;
+module.exports = Contract;

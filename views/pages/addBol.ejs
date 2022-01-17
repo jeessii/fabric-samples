@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <div class="container mt-5 text-center">
+        <h1>Welcome </h1>
+        <p>If you want to register a new Bill of Lading please, fill the form</p>
+    </div>
+
+
+    <div class="bol-form">
+        <%- messages() %>
+            <form action="/addBol" method="post">
+                <div class=row>
+                    <p><br>For security reasons repeat here your email:</br></p>
+                    <input type="text" name="email" placeholder="Email" required><br><br>
+                </br>
+                    <div class="col-sm-4">
+                        BoL ID:
+                        <input type="text" name="id" placeholder="ID" required><br><br>
+
+                        <p><br>SHIPPER</br></p>
+                        <!-- user input-->
+                        Name:
+                        <input type="text" name="ShipperName" placeholder="Name" required><br><br>
+                        Address:
+                        <input type="text" name="ShipperAddress" placeholder="Address" required><br><br>
+                        City:
+                        <input type="text" name="ShipperCity" placeholder="City" required><br><br>
+                        <!--State:
+                        <input type="text" name="shipperState" placeholder="State" required><br><br>
+                        ZIP:
+                        <input type="text" name="shipperZIP" placeholder="ZIP" required><br><br>-->
+                        SID NO..:
+                        <input type="text" name="ShipperSID" placeholder="SID" required><br><br>
+                    </div>
+                    <div class="col-sm-4">
+                        <p><br>SHIP TO</br></p>
+                        <!-- user input-->
+                        Name:
+                        <input type="text" name="ShipToName" placeholder="Name" required><br><br>
+                        Address:
+                        <input type="text" name="ShipToAddress" placeholder="Address" required><br><br>
+                        City:
+                        <input type="text" name="ShipToCity" placeholder="City" required><br><br>
+                        <!--State:
+                        <input type="text" name="shipToState" placeholder="State" required><br><br>
+                        ZIP:
+                        <input type="text" name="shipToZIP" placeholder="ZIP" required><br><br>-->
+                        SID NO..:
+                        <input type="text" name="ShipToCID" placeholder="SID" required><br><br>
+                    </div>
+
+                    <!-- <div class="col-sm-4">
+                        <p><br>CARRIER NAME</br></p>
+                        <input type="text" name="carrierName" placeholder="Name" required><br><br>
+                        Trailer NO.:
+                        <input type="text" name="trailerNO" placeholder="TraileNO" required><br><br>
+                        Serial NOS.:
+                        <input type="text" name="serialNOS" placeholder="SerialNOS" required><br><br>
+                        SCAC:
+                        <input type="text" name="SCAC" placeholder="SCAC" required><br><br>
+                        PRO NO.:
+                        <input type="text" name="proNO" placeholder="PRO NO." required><br><br>
+                    </div>-->
+                    <div class="col-sm-4">
+                        <p>THIRD PARTY FREIGHT CHARGES BILL TO </p>
+                        <!-- user input-->
+                        Name:
+                        <input type="text" name="BillToName" placeholder="Name" required></br><br>
+                        Address:
+                        <input type="text" name="BillToAddress" placeholder="Address" required><br><br>
+                        City:
+                        <input type="text" name="BillToCity" placeholder="City" required><br><br>
+                        <!--State:
+                    <input type="text" name="thirdPartyState" placeholder="State" required><br><br>
+                    ZIP:
+                    <input type="text" name="thirdPartyZIP" placeholder="ZIP" required><br><br>-->
+                        Telephone:
+                        <input type="text" name="BillToTelephone" placeholder="Telephone" required><br><br>
+                    </div>
+
+                    <!-- submit button -->
+                    <input type="submit" value="Add">
+                </div>
+            </form>
+    </div>
+
+
+
+    </div>
+    <br />
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+
+</html>

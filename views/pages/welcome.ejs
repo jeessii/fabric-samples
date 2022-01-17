@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <div class="container mt-5 text-center">
+        <h1>Welcome <%= data[0].nombre%>
+        </h1>
+
+        <div class="accordion arrows">
+            <input type="radio" name="accordion" id="cb1" />
+            <section class="box">
+                <label class="box-title" for="cb1">Your personal information</label>
+                <label class="box-close" for="acc-close"></label>
+                <div class="box-content">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <!--<th>Number of Transactions</th>-->
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="information">
+                            <% if (data) { %>
+                                <% for (var i=0; i < data.length; i++) { %>
+                                    <tr>
+                                        <!--<td>
+                                        <%= (i+1) %>
+                                    </td>-->
+                                        <td>
+                                            <%= data[i].nombre%>
+                                                <%= data[i].apellido%>
+                                        </td>
+                                        <td>
+                                            <%= data[i].email %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].cumpleaños %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].genero %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <input type="radio" name="accordion" id="cb2" />
+            <section class="box">
+                <label class="box-title" for="cb2">Your actual documents/transactions in our data base </label>
+                <label class="box-close" for="acc-close"></label>
+                <div class="box-content">
+                    <p>Your actual documents in our data base are:</p>
+                    <table class="table table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th>Number of Transactions</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="information">
+                            <% if (data) { %>
+                                <% for (var i=0; i < data.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= (i+1) %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].nombre%>
+                                                <%= data[i].apellido%>
+                                        </td>
+                                        <td>
+                                            <%= data[i].email %>
+                                        </td>
+
+                                    </tr>
+                                    <% } %>
+                                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <input type="radio" name="accordion" id="cb3" />
+            <section class="box">
+                <label class="box-title" for="cb3">If you want to add a new Bill of Lading </label>
+                <label class="box-close" for="acc-close"></label>
+                <div class="box-content">
+                    <a href="/addBol" class="btn btn-primary mb-2">Add a New BoL</a>
+                </div>
+            </section>
+
+            <input type="radio" name="accordion" id="acc-close" />
+        </div>
+
+
+    </div>
+
+    </div>
+    </div>
+    <br />
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+
+</html>
