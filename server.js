@@ -29,7 +29,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-import enrollUser from './organization/digibank/application/enrollUser.js';
+import enrollUser from './commercial-paper/organization/digibank/application/enrollUser.js';
 import checkUsers from './checkUsers.js'
 import pkg from './asset-transfer-basic/chaincode-javascript/lib/assetTransfer.js';
 const { AssetExists, CreateAsset } = pkg;
@@ -187,7 +187,7 @@ app.post('/addBol', function (req, res) {
     const Wgt = req.body.Wgt;
     const Pallet = req.body.Pallet;
     const AdditionalShipperInfo = req.body.AdditionalShipperInfo;
-
+/*
     const ctx = Contract;
    
 
@@ -201,7 +201,7 @@ app.post('/addBol', function (req, res) {
     }
 
 
-
+*/
 
 
 

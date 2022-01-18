@@ -6,9 +6,9 @@ let user = '';
 
 async function checkUsers(user) {
     try {
-        const folderBlockchain = fs.existsSync('../web_tfg/identityBlockchain/user/' + user);
+        const folderBlockchain = fs.existsSync('../fabric-samples/identityBlockchain/user/' + user);
         console.log(folderBlockchain);
-        const folderMySQL = fs.existsSync('../web_tfg/identityMySQL/user/'+user);
+        const folderMySQL = fs.existsSync('../fabric-samples/identityMySQL/user/'+user);
         console.log(folderMySQL);
         if (folderBlockchain && folderMySQL) {
             console.log('Users exists on both sides');

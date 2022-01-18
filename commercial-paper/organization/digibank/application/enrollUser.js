@@ -20,7 +20,7 @@ let newUser = " ";
 async function main_enrollUser(newUser) {
     try {
         // load the network configuration
-        const pathTest = path.join(process.cwd(), './organization/digibank/gateway/connection-org1.yaml');
+        const pathTest = path.join(process.cwd(), './commercial-paper/organization/digibank/gateway/connection-org1.yaml');
         let test = fs.readFileSync(pathTest, {
             encoding: 'utf8',
             flag: 'r'
@@ -40,7 +40,7 @@ async function main_enrollUser(newUser) {
         //var newUser = scanf('%s');
 
         //Crear carpeta para cada user nuevo
-        fs.mkdir("../../../identityBlockchain/user/" + newUser + "/wallet", {
+        fs.mkdir("/identityBlockchain/user/" + newUser + "/wallet", {
             recursive: true
         }, function (err) {
             if (err) {
@@ -49,7 +49,7 @@ async function main_enrollUser(newUser) {
                 console.log("New directory successfully created.")
             }
         })
-        const walletPath = path.join(process.cwd(), '../../../identityBlockchain/user/' + newUser + '/wallet');
+        const walletPath = path.join(process.cwd(), '/identityBlockchain/user/' + newUser + '/wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
