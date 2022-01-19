@@ -94,7 +94,7 @@ app.get('/sign_in', function (req, res) {
     res.render('pages/sign_in');
 });
 
-app.post('/sign_in', function (req, res) {
+/*app.post('/sign_in', function (req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -109,6 +109,7 @@ app.post('/sign_in', function (req, res) {
             console.log(results[0]);
             console.log(error);
             enrollUser.main_enrollUser(email);
+            
             //User not found
             if (results.length == 0 && checkUsers(results[0].nombre) == false) {
                 console.log('User/Password incorrect');
@@ -124,7 +125,7 @@ app.post('/sign_in', function (req, res) {
                 res.render('pages/welcome', {
                     username: email
                 });
-            };*/
+            };
             // else if (results[0].password == password && results[0].email == email) {
             else {
                 const hashedPassword = crypto.createHash('sha256').update(password).digest('base64');
@@ -155,6 +156,49 @@ app.post('/sign_in', function (req, res) {
             }
         });
     };
+});*/
+
+app.post('/sign_in', function (request, response) {
+    const email = request.body.email;
+    const password = request.body.password;
+
+    if (email != undefined && password != undefined) {
+        conexion_db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function (error, results, fields) {
+
+            if (error) {
+                console.log('La cagaste 1!');
+                throw error;
+            }
+            console.log(results[0]);
+            //console.log(error);
+            if (results.length <= 0) {
+                console.log('User/Password incorrect');
+                request.flash('error', 'Please correct enter email and Password!');
+                //res.send('User/Password incorrect');
+                response.redirect('/sign_in');
+            }             
+            else if (results[0].password == password && results[0].email == email) {
+                //req.session.loggedIn = true;
+                //req.session.username = username;
+                //res.send("User OK");
+                console.log('Entraste!');
+
+                response.render('pages/welcome', {
+                    //username: username,
+                    data: results,
+                });
+            } else {
+                response.send('Incorrect Username and/or Password!');
+            }
+            response.end();
+
+        });
+    }
+    else {
+        response.send('Please enter Username and Password!');
+        response.end();
+    }
+
 });
 
 // Welcome page
@@ -187,25 +231,27 @@ app.post('/addBol', function (req, res) {
     const Wgt = req.body.Wgt;
     const Pallet = req.body.Pallet;
     const AdditionalShipperInfo = req.body.AdditionalShipperInfo;
-/*
+
     const ctx = Contract;
    
-
+    
     if (AssetExists(ctx, id) != id) {
-        req.flash('error', 'This ID already exists, we will create a new BoL')
         CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
             BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt, Pallet, AdditionalShipperInfo);
         res.render('pages/welcome', {
             data: results,
         });
     }
+    else{
+        req.flash('error', 'This ID already exists, we will create a new BoL')
+        CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
+            BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt, Pallet, AdditionalShipperInfo);
+        res.render('pages/welcome', {
+            data: results,
+        });
 
+    }
 
-*/
-
-
-
-    res.render('pages/addBol');
 });
 
 
