@@ -60,7 +60,7 @@ class AssetTransfer extends Contract {
                 Pallet: 'No',
                 AdditionalShipperInfo: 'Important Goods'
 
-            },
+            }
 
         ];
         
@@ -73,7 +73,7 @@ class AssetTransfer extends Contract {
             await ctx.stub.putState(asset.ID, Buffer.from(stringify(sortKeysRecursive(asset))));
         }
     }
-
+    
     // CreateAsset issues a new asset to the world state with given details.
     async CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
         BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt,Pallet,  AdditionalShipperInfo ) {

@@ -4,6 +4,9 @@
 /* CSS Welcome */
 .table-bordered{
     background-color: white;
+    height: 64px;
+    width: 100% ;
+    padding: 20px;
 }
 .accordion {
     margin: auto;

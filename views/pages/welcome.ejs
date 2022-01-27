@@ -12,9 +12,9 @@
     </header>
 
     <div class="container mt-5 text-center">
+        <br /> <br /> 
         <h1>Welcome <%= data[0].nombre%>
         </h1>
-
         <div class="accordion arrows">
             <input type="radio" name="accordion" id="cb1" />
             <section class="box">
@@ -40,6 +40,7 @@
                                         <%= (i+1) %>
                                     </td>-->
                                         <td>
+
                                             <%= data[i].nombre%>
                                                 <%= data[i].apellido%>
                                         </td>
@@ -67,14 +68,20 @@
                 <div class="box-content">
                     <p>Your actual documents in our data base are:</p>
                     <table class="table table-bordered">
-
                         <thead>
                             <tr>
-                                <th>Number of Transactions</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
+                                <th>ID BoL</th>
+                                <th>Time Stamp</th>
+                                <th>Shipper Name</th>
+                                <th>Shipper Address</th>
+                                <th>Ship To Name</th>
+                                <th>Ship To Address</th>
+                                <th>Bill To Name</th>
+                                <th>Bill To Address</th>
+                                <th>Charge Terms</th>
+                                <th>Number of Packets</th>
+                                <th>Weight [Kg]</th>
+                        
                             </tr>
                         </thead>
 
@@ -83,19 +90,43 @@
                                 <% for (var i=0; i < data.length; i++) { %>
                                     <tr>
                                         <td>
-                                            <%= (i+1) %>
+                                            <%= data[i].IDBol %>
                                         </td>
                                         <td>
-                                            <%= data[i].nombre %>
-                                                <%= data[i].apellido%>
+                                            <%= data[i].fecha %>
                                         </td>
                                         <td>
-                                            <%= data[i].email %>
+                                            <%= data[i].ShipperName %>
                                         </td>
-
+                                        <td>
+                                            <%= data[i].ShipperAddress %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].ShipToName %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].ShipToAddress %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].BillToName %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].BillToAddress %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].ChargeTerms %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].NumberPackets %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].Weight %>
+                                        </td>
+                            
                                     </tr>
                                     <% } %>
-                                        <% } %>
+                                    <% } %>
+                                    
                         </tbody>
                     </table>
                 </div>

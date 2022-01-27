@@ -32,7 +32,7 @@ import crypto from 'crypto';
 import enrollUser from './commercial-paper/organization/digibank/application/enrollUser.js';
 import checkUsers from './checkUsers.js'
 import pkg from './asset-transfer-basic/chaincode-javascript/lib/assetTransfer.js';
-const { AssetExists, CreateAsset } = pkg;
+const { AssetExists, CreateAsset, UpdateAsset } = pkg;
 //Requires para cargar/iniciar la base de datos MySQL
 const db_bbdd_env = require('dotenv').config();
 import Contract from './asset-transfer-basic/chaincode-javascript/lib/assetTransfer.js';
@@ -232,11 +232,12 @@ app.post('/addBol', function (req, res) {
     const Pallet = req.body.Pallet;
     const AdditionalShipperInfo = req.body.AdditionalShipperInfo;
 
-    const ctx = Contract;
-   
+    const ctx = new Contract;
+    let aa =new AssetTransfer();
+    const comprobarAsset = AssetExists(ctx, id);
     
-    if (AssetExists(ctx, id) != id) {
-        CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
+    if (!comprobarAsset) {
+         CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
             BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt, Pallet, AdditionalShipperInfo);
         res.render('pages/welcome', {
             data: results,
@@ -244,12 +245,11 @@ app.post('/addBol', function (req, res) {
     }
     else{
         req.flash('error', 'This ID already exists, we will create a new BoL')
-        CreateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
+        UpdateAsset(ctx, id, ShipperName, ShipperAddress, ShipperCity, ShipperSID, ShipToName, ShipToAddress, ShipToCity, ShipToCID,
             BillToName, BillToAddress, BillToCity, BillToTelephone, CostumerOrderNumber, NumberPkgs, Wgt, Pallet, AdditionalShipperInfo);
         res.render('pages/welcome', {
             data: results,
         });
-
     }
 
 });
